@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>myfirst-MVC-project</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+  </welcome-file-list>
+  
+  <absolute-ordering/>
+  
+<!--  
+  *   The dispatcher servlet/frontcontroller is initialized when ever the server starts up (using the <load-on-startup>1</load-on-startup>)
+
+  *   The dispatcher servlet automatically creates a container called WebApplicationContext which implements
+  *   the ApplicationContext and it has its extra features. But it is not created manually as the
+  *   standalone projects(e.g: projects in my Spring Core folder).
+  
+  *   The dispatcher servlet looks for a file which has same name as the dispatcher servlet/front controller
+  *   which is appended with -servlet.xml (e.g dad-frontcontroller-servlet.xml) 
+  
+  *   Dispatcher servlet reads the file and uses the Component scan to scan through the package & find all the classes with @Controller
+  *   (N.B: @controller does the same function as @Component) then the objects are created/initialized for each classes in the
+  *   webApplicationContext container.
+  
+  *  If the name of the spring config file is not same as the dispatcher servlet name we can use the <init-param> to give it the name we want.  
+  -->
+  <servlet>
+    <servlet-name>dad-frontController</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    
+     <init-param>
+      <param-name>contextConfigLocation</param-name>
+      <param-value>/WEB-INF/bean.xml</param-value>
+    </init-param> 
+  
+    
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>dad-frontController</servlet-name>
+    <url-pattern>/home.com/*</url-pattern>
+  </servlet-mapping> 
+</web-app>
